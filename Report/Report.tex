@@ -1,0 +1,468 @@
+% !TEX program = lualatex
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[english,vietnam]{babel}
+%\usepackage{vntex}
+\usepackage{a4wide,epsfig,array,hhline,fancyhdr}
+%\usepackage{unicode-math}
+%\usepackage{polyglossia}
+\usepackage{amsmath,amsxtra,amssymb,latexsym, amscd,amsthm}
+\usepackage{multicol,longtable}
+%\usepackage{diagbox}	%Make diagonal lines in tables
+%\usepackage{booktabs}
+%\usepackage{alltt}
+\usepackage[framemethod=tikz]{mdframed}	% For highlighting paragraph backgrounds
+\usepackage{caption,subcaption}
+%\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+%\usepackage{enumerate}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{graphics}
+%\usepackage{geometry}
+%\usepackage{setspace}
+%\usepackage{tikz}
+\usepackage[unicode]{hyperref}
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+%\usepackage{pstcol} 								% PSTricks with the standard color package
+
+\newtheorem{theorem}{{\bf Định lý}}
+\newtheorem{property}{{\bf Tính chất}}
+\newtheorem{proposition}{{\bf Mệnh đề}}
+\newtheorem{corollary}[proposition]{{\bf Hệ quả}}
+\newtheorem{lemma}[proposition]{{\bf Bổ đề}}
+
+
+%\usepackage{fancyhdr}
+\setlength{\headheight}{40pt}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{
+	\begin{tabular}{rl}
+		\begin{picture}(25,15)(0,0)
+		\put(0,-8){\includegraphics[width=8mm, height=8mm]{Images/LogoBK.jpg}}
+		%\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+		\end{picture}&
+		%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+		\begin{tabular}{l}
+			\textbf{\bf \ttfamily Trường Đại Học Bách Khoa Tp.Hồ Chí Minh}\\
+			\textbf{\bf \ttfamily Khoa Khoa Học và Kỹ Thuật Máy Tính}
+		\end{tabular} 	
+	\end{tabular}
+}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+\end{tabular}  }
+\fancyfoot{} % clear all footer fields
+\fancyfoot[L]{\scriptsize \ttfamily Báo cáo bài tập lớn, môn kiến trúc máy tính - Niên khóa 2019-2020}
+\fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+
+%%%
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+	{-3.25ex\@plus -1ex \@minus -.2ex}%
+	{1.5ex \@plus .2ex}%
+	{\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+
+\everymath{\color{blue}}%make in-line maths symbols blue to read/check easily
+
+\sloppy
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+%space remove between caption, figure, and text
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+%space remove between caption, table, and text
+
+%\floatplacement{figure}{H}%forced here float placement automatically for figures
+%\floatplacement{table}{H}%forced here float placement automatically for table
+%the following settings (11 lines) are to remove white space before or after the figures and tables
+%\setcounter{topnumber}{2}
+%\setcounter{bottomnumber}{2}
+%\setcounter{totalnumber}{4}
+%\renewcommand{\topfraction}{0.85}
+%\renewcommand{\bottomfraction}{0.85}
+%\renewcommand{\textfraction}{0.15}
+%\renewcommand{\floatpagefraction}{0.8}
+%\renewcommand{\textfraction}{0.1}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\usetikzlibrary{calc}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=C++,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+\usepackage{verbatim}
+
+\renewcommand{\contentsname}{Mục lục}
+\renewcommand{\refname}{Tài liệu tham khảo}
+\usepackage[titles]{tocloft}
+
+\renewcommand{\cftdot}{}
+
+
+
+\begin{document}
+	
+	\begin{titlepage}
+		\begin{tikzpicture}[remember picture, overlay]
+		\draw[line width = 3pt,color=blue] ($(current page.north west) + (2.2cm,-2.2cm)$) rectangle ($(current page.south east)
+		+ (-2.2cm,2.2cm)$);
+		\draw[line width = 2pt,color=green] ($(current page.north west) + (2cm,-2cm)$) rectangle ($(current page.south east)
+		+ (-2cm,2cm)$);
+		\end{tikzpicture}
+		\vspace{1cm}
+		\begin{center} \large
+			ĐẠI HỌC BÁCH KHOA THÀNH PHỐ HỒ CHÍ MINH \\
+			\textbf{KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH} \\
+			- - - - - - - - - - - - - - - - - - - - -
+		\end{center}
+		
+		
+		\vspace{1cm}
+		\begin{figure}[h!]
+			\begin{center}
+				\includegraphics[width=3.6cm]{Images/LogoBK.jpg}
+			\end{center}
+		\end{figure}
+		\vspace{1cm}
+		
+		
+		
+		\begin{center}
+			\begin{tabular}{c}
+				\multicolumn{1}{c}{\textbf{{\Large KIẾN TRÚC MÁY TÍNH}}}    \\
+				\\ \hline \\
+				\multicolumn{1}{l}{\textbf{{\Large Nhóm: L07\_02 --- Bài tập lớn}}}\\
+				\\
+				\textbf{{\Huge Kiến trúc tập lệnh MIPS}}              \\
+				\\ \hline \\
+			\end{tabular}
+		\end{center}
+		
+		
+		
+		\begin{table}[h]
+			\begin{tabular}{rrlrr}
+				\hspace{3cm}
+				& {\large Giáo viên hướng dẫn}: & {\large Nguyễn Xuân Minh}   &         & \\
+				& {\large Sinh viên}:           & {\large Hoàng Gia Khang } & 1812535 & \\
+				& {}                            & {\large Hồ Thiên Long } & 1812869 & \\
+				& {}                            & {\large Nguyễn Hồng Nhân } & 1813330 & \\
+			\end{tabular}
+		\end{table}
+		
+		\vspace{2cm}
+		
+		\begin{center}
+			{\footnotesize Thành phố Hồ Chí Minh, 12/2019}
+		\end{center}
+		
+	\end{titlepage}
+
+%Mục lục
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+
+\section{Đề bài}
+Chia 2 số thực \\
+Cho 2 số thực dạng chuẩn (Standard Floating Point) A và B với độ chính xác đơn (32 bit). Sử dụng hợp ngữ assembly MIPS, viết thủ tục chia hai số A, B.
+\section{Yêu cầu}
+\begin{itemize}
+	\item Sử dụng tâp lệnh MIPS để hiện thực các thủ tục bên dưới.
+	\item Thống kê số lệnh, loại lệnh (instruction type) của mỗi chương trình.
+	\item Tính và trình bày cách tính thời gian chạy của chương trình trên máy tính kiến trúc MIPS có tần số 3.4GHz
+	\item Code:
+	\begin{itemize}
+		\item [$\circ$] Code style phải rõ ràng, có comment, phân hoạch công việc theo từng hàm, CHỈ DÙNG LỆNH MIPS CHUẨN.
+		\item [$\circ$] Truyền nhận và trả kết quả khi gọi hàm theo quy ước của thanh ghi (thanh ghi \$a argument, thanh ghi \$v giá trị trả về khi gọi hàm).
+		\item [$\circ$] Xuất kết quả để kiểm tra.
+	\end{itemize}
+	\item Báo cáo: Nộp 2 files:
+	\begin{itemize}
+		\item [$\circ$] Diễn giải (file .PDF)
+		\item [$\circ$] Chương trình (file .ASM)
+	\end{itemize}
+\end{itemize}
+\section{Ý tưởng hiện thực}
+Để chia hai số thực mà chỉ dùng lệnh MIPS chuẩn thì ta sẽ đưa hai số thực cần tính toán về định dạng IEEE 754. Biểu diễn một số thực theo định dạng IEEE 754 sẽ gồm có 3 phần:
+\begin{itemize}
+	\item "S" biểu diễn dấu (sign) là bit thứ 31 (1 bit). 
+	\item "Phần mũ" (exponent) là bit 23-30 (8 bit)
+	\item "Phần phân số" (fraction) là bit 0-22 (23 bit)
+\end{itemize}
+Sau đó ta tính toán trên từng phần.
+\section{Trình tự hiện thực}
+Chia 2 số thực bất kỳ ta thực hiện theo trình tự sau:
+\begin{itemize}
+	\item Nhập và lưu giá trị của 2 số thực $A$ và $B$. Sau đó load giá trị vào các thanh ghi
+	\item Kiểm tra 3 trường hợp đặc biêt:
+	  \begin{itemize}
+		\item [$\circ$] $A = 0$ và $B = 0$. Khi đó, ta không thể thực hiện phép chia. Nên $A / B = $ NaN
+		\item [$\circ$] $A = 0$ và $B \ne 0$. Đây là phép chia của 0 cho một số thực bất kỳ vậy kết quả: $A / B = 0$
+		\item [$\circ$] $A \ne 0$ và $B = 0$. Đây là phép chia của một số thực khác 0 cho 0. Vậy kết quả sẽ là $A / B = $ infinity
+	  \end{itemize}
+	\item Nếu không phải 1 trong 3 trường hợp trên tức là $A \ne 0$ và $B \ne 0$ thì ta sẽ đưa cả 2 số thực về dạng IEEE 754 như sau:
+	  \begin{itemize}
+		\item [$\circ$] Dịch A và B sang phải 31 bit ta sẽ xác định được bit dấu S. Nếu số thực dương thì S = 1 còn số thực âm thì S = 0
+		\item [$\circ$] Dịch trái A và B 1 bit để bỏ bit dấu. Sau đó dịch phải 24 bit. Ta sẽ thu được 8 bit của phần mũ E.
+		\item [$\circ$] Dịch trái A và B 9 bit để bỏ đi bit dấu và bit của phần mũ, sau đó dịch sang phải 9 bit. Ta sẽ thu được 23 bit của phần phân số F
+	  \end{itemize}
+   \item Sau khi tách ra làm 3 phần. Ta sẽ tính toán trên từng phần như sau:
+    \begin{itemize}
+   	\item [$\circ$] Ta sẽ lấy 2 bit dấu S của A và B dùng phép XOR để xác định dấu của phép chia
+   	\item [$\circ$] Xác định phần mũ bằng cách. Lấy phần mũ của A trừ đi B cộng bias (127). Tức là: $EA - EB + bias$
+   	\item [$\circ$] Ở phần phân số (fraction) thì ta sẽ thêm 1 tại bit thứ 23 bằng cách lấy fraction ori với 0x00800000. Sau đó ta dùng vòng lặp (loop) để lấy ra 24 bit của kết quả phép chia đồng thời kiểm tra xem kết quả có dư hay là không? Nếu có thì cộng kết quả trên thêm 1 (vì nếu dư thì sẽ làm tròn lên). Sau đó ta lại tiếp tục thực hiện andi với 0x007FFFFF để bỏ 1 ở bit thứ 23 đi. Cuối cùng ta thu được 23 bit của fraction
+   \end{itemize}
+	\item Sau đó ta tổng hợp 3 phần lại sẽ được kết quả của phép chia 2 số thực
+\end{itemize}
+\section{Thống kê số lệnh, loại lệnh (instruction type) và thời gian chạy}
+Sử dụng công cụ Instruction Counter để đếm số lệnh trong chương trình: \\
+Tools -> Instruction Counter
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/1.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Sử dụng công thức sau để tính thời gian chạy:
+\begin{center}
+	$\text{CPU time} = \dfrac{\text{CPU Clock cycles}}{\text{Clock rate}}$ = $\dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}}$
+\end{center}
+Trong đó:
+\begin{itemize}
+	\item CPU time là thời gian xử lý của chương trình (không tính thời gian giao tiếp I/O, thời gian chờ ...).
+	\item CPU Clock cyles: Tổng số chu kỳ thực thi.
+	\item Instruction Count là tổng số lệnh thực thi của chương trình.
+	\item CPI (cycle per instruction) là số chu kỳ thực thi trên một lệnh.
+	\item Clock rate là số chu kỳ thực thi trên một giây hay còn gọi là tần số. Theo yêu cầu là $3.4GHz$ hay trong một giây có $3.4\text{x}10^9$ dao động.
+\end{itemize}
+Dưới đây là một số ví dụ cho thấy thời gian chạy khác nhau:
+\subsection{Ví dụ 1}
+Nhập vào: $A = -1.26$ và $B = 2.4$ kết quả của phép chia là $A / B = -0.525$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/0.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/3.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 410\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 250 lệnh chiếm 60\%
+	\item I-type: 136 lệnh chiếm 33\%
+	\item J-type: 24 lệnh chiếm 5\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{410\text{x}1}{3.4\text{x}10^9} = 0.1206 \text{x}10^{-6} s = 0.1206 \mu s$
+\subsection{Ví dụ 2}
+Nhập vào: $A = 62.134$ và $B = 15.9$ kết quả của phép chia là $A / B = 3.9077985$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/6.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/7.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 413\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 252 lệnh chiếm 61\%
+	\item I-type: 137 lệnh chiếm 33\%
+	\item J-type: 24 lệnh chiếm 5\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{413\text{x}1}{3.4\text{x}10^9} = 0.1215 \text{x}10^{-6} s = 0.1215 \mu s$
+\subsection{Ví dụ 3}
+Nhập vào: $A = 0$ và $B = -123.45$ kết quả của phép chia là $A / B = 0$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/8.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/9.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 32\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 7 lệnh chiếm 21\%
+	\item I-type: 24 lệnh chiếm 75\%
+	\item J-type: 1 lệnh chiếm 3\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{32\text{x}1}{3.4\text{x}10^9} = 0.0094 \text{x}10^{-6} s = 0.0094 \mu s$
+\subsection{Ví dụ 4}
+Nhập vào: $A = 99.86$ và $B = 0$ kết quả của phép chia là $A / B = Infinity$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/10.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/11.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 33\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 7 lệnh chiếm 21\%
+	\item I-type: 25 lệnh chiếm 75\%
+	\item J-type: 1 lệnh chiếm 3\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{33\text{x}1}{3.4\text{x}10^9} = 0.0097 \text{x}10^{-6} s = 0.0097 \mu s$
+\subsection{Ví dụ 5}
+Nhập vào: $A = -1.1$ và $B = -9.9$ kết quả của phép chia là $A / B = 0.11111111$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/4.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/5.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 413\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 252 lệnh chiếm 61\%
+	\item I-type: 137 lệnh chiếm 33\%
+	\item J-type: 24 lệnh chiếm 5\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{413\text{x}1}{3.4\text{x}10^9} = 0.1215 \text{x}10^{-6} s = 0.1215 \mu s$
+\subsection{Ví dụ 6}
+Nhập vào: $A = 0$ và $B = 0$ kết quả của phép chia là $A / B = NaN$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/12.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/11.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 33\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 7 lệnh chiếm 21\%
+	\item I-type: 25 lệnh chiếm 75\%
+	\item J-type: 1 lệnh chiếm 3\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{33\text{x}1}{3.4\text{x}10^9} = 0.0097 \text{x}10^{-6} s = 0.0097 \mu s$
+\subsection{Ví dụ 7}
+Nhập vào: $A = 5$ và $B = -2$ kết quả của phép chia là $A / B = -2.5$
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=7cm]{Images/14.png}
+		\end{center}
+	\end{figure}
+\end{center}
+\begin{center}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=9cm]{Images/15.png}
+		\end{center}
+	\end{figure}
+\end{center}
+Tổng số lệnh: 114\\
+Trong đó:
+\begin{itemize}
+	\item R-type: 61 lệnh chiếm 53\%
+	\item I-type: 50 lệnh chiếm 43\%
+	\item J-type: 3 lệnh chiếm 2\%
+\end{itemize}
+Tính toán thời gian chạy:\\
+$\text{CPU time} = \dfrac{\text{Instruction Count x CPI}}{\text{Clock rate}} = \dfrac{114\text{x}1}{3.4\text{x}10^9} = 0.0335 \text{x}10^{-6} s = 0.0335 \mu s$
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\addcontentsline{toc}{section}{Tài liệu tham khảo}
+\begin{thebibliography}{99999}
+	\bibitem{notes} Phạm Quốc Cường, {\em Kiến trúc máy tính}, Nhà xuất bản đại học quốc gia thành phố Hồ Chí Minh, Năm 2017.
+	\bibitem{notes} MIPS Technologies, Inc {\em MIPS32™ Architecture For Programmers Volume II: The MIPS32™ Instruction Set.}  2003.
+	\bibitem{vietcodes} {Hợp ngữ MIPS: \url{https://vietcodes.github.io/algo/mips}}.
+	\bibitem{notes}{ Float Point Tutorial: \\ \url{https://www.rfwireless-world.com/Tutorials/floating-point-tutorial.html?fbclid}}.
+
+	
+\end{thebibliography}
+\addcontentsline{toc}{section}{Tài liệu tham khảo}
+\end{document}
+

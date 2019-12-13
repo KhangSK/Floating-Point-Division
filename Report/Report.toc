@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Đề bài}{2}{section.1}
+\contentsline {section}{\numberline {2}Yêu cầu}{2}{section.2}
+\contentsline {section}{\numberline {3}Ý tưởng hiện thực}{2}{section.3}
+\contentsline {section}{\numberline {4}Trình tự hiện thực}{2}{section.4}
+\contentsline {section}{\numberline {5}Thống kê số lệnh, loại lệnh (instruction type) và thời gian chạy}{3}{section.5}
+\contentsline {subsection}{\numberline {5.1}Ví dụ 1}{4}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Ví dụ 2}{4}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Ví dụ 3}{5}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Ví dụ 4}{6}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Ví dụ 5}{6}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Ví dụ 6}{7}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Ví dụ 7}{8}{subsection.5.7}
+\contentsline {section}{Tài liệu tham khảo}{9}{section*.19}
